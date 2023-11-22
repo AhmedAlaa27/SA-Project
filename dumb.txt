@@ -1,0 +1,23 @@
+<li className="list-group-item pt-3 pb-3 fw-bold text-bg-dark">
+<FontAwesomeIcon className='icon' icon={faImage} beat />
+    <Link to={'/medias'} className='span'>Medias</Link>
+</li>
+
+<li className="list-group-item pt-3 pb-3 fw-bold text-bg-dark">
+<FontAwesomeIcon className='icon' icon={faUser} beat />
+    <span className='span'>
+        <a className="toggle-link" data-bs-toggle="collapse" href="#collapseUser" role="button" aria-expanded="false" aria-controls="collapseExample">
+            User Management
+        </a>
+    <div className="collapse" id="collapseUser">
+        <ul className="list-group">
+            <Link to={'/groups/manage'} className="toggle-list list-group-item bg-dark">
+                Manage Groups
+            </Link>
+            <Link to={'/users/manage'} className="toggle-list list-group-item bg-dark">
+                Manage Users
+            </Link>
+        </ul>
+    </div>
+    </span>
+</li>
