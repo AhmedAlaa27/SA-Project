@@ -2,12 +2,20 @@ import { Link } from 'react-router-dom';
 import '../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import userLogged from '../atoms/LoggedIn';
+import { useRecoilState } from 'recoil';
 
 function Navbar() {
+
+    const [isLoggedIn, setIsLoggedIn] = useRecoilState(userLogged);
+    const logout = () => {
+        setIsLoggedIn(false);
+    };
+
     return (
     <nav className="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
         <div className="container">
-            <Link style={{color: 'grey', fontWeight: 'bold'}} className="logo navbar-brand" to="/home">Inventory</Link>
+            <Link style={{color: 'grey', fontWeight: 'bold'}} className="logo navbar-brand" to="./">Inventory</Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
             </button>
@@ -22,7 +30,7 @@ function Navbar() {
                     </a>
                     <ul className="dropdown-menu">
                         <li><Link to={'/profile'} className="dropdown-item" href="#">Profile</Link></li>
-                        <li><Link className="dropdown-item" to={'./'}>Logout</Link></li>
+                        <li><Link className="dropdown-item" to={'./'} onClick={() => logout()}>Logout</Link></li>
                     </ul>
                     </li>
                 </ul>

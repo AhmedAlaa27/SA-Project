@@ -2,32 +2,61 @@ import '../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faUser, faBarsStaggered, faBorderAll, faImage, faChartBar, faSignal } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import userState from '../atoms/UserAtom';
 
 function Sidebar() {
+
+    const [ userInfo, setUserInfo ] = useRecoilState(userState);
+
     return (
         <div className="sidebar bg-dark">
             <ul className="list-group list-group-flush">
                 <div className="container">
+                        {(userInfo.role == 'admin' 
+                         || userInfo.role == 'special')
+                        &&
                         <li className="list-group-item pt-3 pb-3 fw-bold text-bg-dark">
                             <FontAwesomeIcon className='icon' icon={faHouse} beat />
                             <Link className='span' to={'/dashboard'}>Dashboard</Link>
-                        </li>
+                        </li>}
+                        
+                        {(userInfo.role == 'admin') &&
                         <li className="list-group-item pt-3 pb-3 fw-bold text-bg-dark">
                             <FontAwesomeIcon className='icon' icon={faUser} beat />
                             <Link className='span' to={'/users/manage'}>Users Management</Link>
-                        </li>
+                        </li>}
+
+                        {(userInfo.role == 'admin'
+                         || userInfo.role == 'special'
+                         || userInfo.role == 'user') 
+                         &&
                         <li className="list-group-item pt-3 pb-3 fw-bold text-bg-dark">
                         <FontAwesomeIcon className='icon'  icon={faBarsStaggered} beat />
                             <Link className='span' to={'/categories'}>Categories</Link>
-                        </li>
+                        </li>}
+
+                        {(userInfo.role == 'admin'
+                         || userInfo.role == 'special'
+                         || userInfo.role == 'user') 
+                         &&                        
                         <li className="list-group-item pt-3 pb-3 fw-bold text-bg-dark">
                             <FontAwesomeIcon className='icon' icon={faBorderAll} beat />
                             <Link className='span' to={'/products/manage'}>Products</Link>
-                        </li>
+                        </li>}
+
+                        {(userInfo.role == 'admin'
+                         || userInfo.role == 'special'
+                         || userInfo.role == 'user') 
+                         &&                         
                         <li className="list-group-item pt-3 pb-3 fw-bold text-bg-dark">
                             <FontAwesomeIcon className='icon' icon={faChartBar} beat />
                             <Link className='span' to={'/sales/manage'}>Manage Sales</Link>
-                        </li>
+                        </li>}
+
+                        {(userInfo.role == 'admin'
+                         || userInfo.role == 'special') 
+                         && 
                         <li className="list-group-item pt-3 pb-3 fw-bold text-bg-dark">
                         <FontAwesomeIcon className='icon' icon={faSignal} beat />
                             <span className='span'>
@@ -45,7 +74,7 @@ function Sidebar() {
                                     </ul>
                                 </div>
                             </span>
-                        </li>
+                        </li>}
                 </div>
             </ul>
         </div>
