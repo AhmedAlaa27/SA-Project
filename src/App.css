@@ -222,3 +222,86 @@
   font-size: 25px;
   padding-bottom: 5px;
 }
+
+/* ******************************** */
+
+.authentication {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #212529;
+  height: 100vh;
+}
+
+.authentication .container {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 550px;
+  margin: auto;
+  background-color: #fff;
+  padding-bottom: 30px;
+  border-radius: 50px;
+}
+.authentication .container .header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  margin-top: 30px;
+}
+.authentication .container .text {
+  color: #212529;
+  font-size: 48px;
+  font-weight: bold;
+}
+.authentication .container .underline {
+  width: 100px;
+  height: 6px;
+  background: #212529;
+  border-radius: 9px;
+}
+.authentication .container .inputs {
+  margin-top: 55px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.authentication .container .inputs .input {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  width: 350px;
+  height: 70px;
+  background: #eaeaea;
+  border-radius: 15px;
+}
+.authentication .container .inputs .input input {
+  height: 50px;
+  width: 400px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #212529;
+  font-size: 19px;
+  padding: 15px;
+}
+.authentication .container .submit-container {
+  display: flex;
+  gap: 30px;
+  margin: 40px auto 0;
+}
+.authentication .container .submit-container .submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 40px;
+  background: #212529;
+  color: white;
+  border-radius: 50px;
+  font-size: 19px;
+  font-weight: 200;
+  cursor: pointer;
+}
