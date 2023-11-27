@@ -1,7 +1,17 @@
 import { faGrip} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function SalesMonthly() {
+
+    const sales_url = "http://localhost:9000/sales";
+    const [sales, setSales] = useState([]);
+    const getSales = () => {axios.get(sales_url).then((data)=> setSales(data.data))};
+    useEffect(() => {
+        getSales();
+    }, []);
+
     return (
         <div className="sales-monthly">
             <div className="container">
@@ -22,20 +32,19 @@ function SalesMonthly() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>1</th>
-                                    <td>boujehh</td>
-                                    <td>30</td>
-                                    <td>6620.00</td>
-                                    <td>2023-11</td>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td>Seer Katina</td>
-                                    <td>1</td>
-                                    <td>250.00</td>
-                                    <td>2023-10</td>
-                                </tr>
+                                {
+                                    sales.map((sale) => {
+                                        return (
+                                            <tr key={sale.id}>
+                                            <th> {sale.id} </th>
+                                            <td> {sale.productName} </td>
+                                            <td> {sale.quantity} </td>
+                                            <td> {sale.totalPrice} </td>
+                                            <td> {sale.createdAt.slice(0, 7)} </td>
+                                        </tr>
+                                        )
+                                    })
+                                }
                             </tbody>
                         </table>
                     </div>

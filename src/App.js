@@ -16,6 +16,7 @@ import SalesAdd from './pages/SalesAdd';
 import Authentication from './pages/Authentication';
 import { useRecoilState } from 'recoil';
 import userLogged from './atoms/LoggedIn';
+import SaleEdit from './pages/SaleEdit';
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
                 < Route path='/products/manage' element={< ProductsManage />} />
                 < Route path='/sales/manage' element={< SalesManage />} />
                 < Route path='/sales/manage/add' element={< SalesAdd />} />
+                < Route path='/sales/manage/edit/:saleID' element={< SaleEdit />} />
                 < Route path='/sales/mothly-sales' element={< SalesMonthly />} />
                 < Route path='/sales/daily-sales' element={< SalesDaily />} />
                 < Route path='/profile' element={< Profile />} />
