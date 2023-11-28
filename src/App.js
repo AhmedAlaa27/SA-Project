@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard'
@@ -13,14 +13,21 @@ import SalesMonthly from './pages/SalesMonthly';
 import SalesDaily from './pages/SalesDaily';
 import Profile from './pages/Profile';
 import SalesAdd from './pages/SalesAdd';
-import Authentication from './pages/Authentication';
 import { useRecoilState } from 'recoil';
 import userLogged from './atoms/LoggedIn';
 import SaleEdit from './pages/SaleEdit';
+import Login from './pages/Authentication/Login';
+import Register from './pages/Authentication/Register';
+import Authentication from './pages/Authentication';
+import { useEffect } from 'react';
 
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useRecoilState(userLogged)
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(userLogged);
+  let navigate = useNavigate();
+  useEffect(() => {
+    navigate('/')
+  },[])
 
   return (
     <div className="App">
@@ -29,6 +36,8 @@ function App() {
         ?
         <Routes>
           < Route path='/' element={< Authentication />} />
+          < Route path='/login' element={< Login />} />
+          < Route path='/register' element={< Register />} />
         </Routes>
         :
         <>

@@ -1,17 +1,17 @@
 import { faGrip, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRecoilState } from "recoil";
-import userState from "../atoms/UserAtom";
+import UserRole from "../atoms/UserRole";
 
 function ProductsManage() {
 
-    const [userInfo, setUserInfo] = useRecoilState(userState);
+    const [userRole, setUserRole] = useRecoilState(UserRole);
 
     return (
         <div className="products-manage">
             <div className="container">
                 {
-                    (userInfo.role == 'admin')
+                    (userRole == 'admin')
                     &&
                     <div className="card card-1">
                         <div className="card-header">
@@ -25,9 +25,9 @@ function ProductsManage() {
                     </div>
                 }
                 {
-                    (userInfo.role == 'admin' ||
-                     userInfo.role == 'special' ||
-                     userInfo.role == 'user')
+                    (userRole == 'admin' ||
+                     userRole == 'special' ||
+                     userRole == 'user')
                     &&
                     <div className="card card-2">
                         <div className="card-header">
@@ -41,8 +41,8 @@ function ProductsManage() {
                                         <th className="col-1">#</th>
                                         <th className="col-9">Products</th>
                                         {
-                                            (userInfo.role == 'admin' ||
-                                             userInfo.role == 'special')
+                                            (userRole == 'admin' ||
+                                             userRole == 'special')
                                              &&
                                             <th className="col-2">Actions</th>
                                         }
@@ -53,8 +53,8 @@ function ProductsManage() {
                                         <th>1</th>
                                         <td>BMW</td>
                                         {
-                                            (userInfo.role == 'admin' ||
-                                            userInfo.role == 'special')
+                                            (userRole == 'admin' ||
+                                            userRole == 'special')
                                             &&
                                             <td className="actions">
                                                 <button className="btn btn-warning btn-sm">
@@ -70,8 +70,8 @@ function ProductsManage() {
                                         <th>2</th>
                                         <td>Corviette</td>
                                         {
-                                            (userInfo.role == 'admin' ||
-                                            userInfo.role == 'special')
+                                            (userRole == 'admin' ||
+                                            userRole == 'special')
                                             &&
                                             <td className="actions">
                                                 <button className="btn btn-warning btn-sm">
@@ -87,8 +87,8 @@ function ProductsManage() {
                                         <th>3</th>
                                         <td>GTX 4090ti</td>
                                         {
-                                            (userInfo.role == 'admin' ||
-                                            userInfo.role == 'special')
+                                            (userRole == 'admin' ||
+                                            userRole == 'special')
                                             &&
                                             <td className="actions">
                                                 <button className="btn btn-warning btn-sm">
@@ -104,8 +104,8 @@ function ProductsManage() {
                                         <th>4</th>
                                         <td>Gaming Keyboard</td>
                                         {
-                                            (userInfo.role == 'admin' ||
-                                            userInfo.role == 'special')
+                                            (userRole == 'admin' ||
+                                            userRole == 'special')
                                             &&
                                             <td className="actions">
                                                 <button className="btn btn-warning btn-sm">

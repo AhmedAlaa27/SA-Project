@@ -1,63 +1,20 @@
 import { useState } from 'react';
 import '../App.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
+import { useRecoilState } from 'recoil';
+import userLogged from '../atoms/LoggedIn';
+import { useNavigate } from 'react-router-dom';
 
 function Authentication() {
 
-    const [register, setRegister] = useState(true);
+    const [isLogged, setIsLogged] = useRecoilState(userLogged);
+    let navigate = useNavigate();
 
-    const login = () => {
-        setRegister(false);
-    }
-    const Register = () => {
-        setRegister(true);
-    }
+    navigate('/login')
 
     return (
         <div className="authentication">
-            {
-                (register)
-                ?
-                <div className="container">
-                    <div className="header">
-                        <div className="text">Sign Up</div>
-                        <div className="underline"></div>
-                    </div>
-                    <div className="inputs">
-                        <div className="input">
-                            <input type="text" placeholder='username...'/>
-                        </div>
-                        <div className="input">
-                            <input type="password" placeholder='password...' />
-                        </div>
-                        <div className="input">
-                            <input type="password" placeholder='confirm-password...' />
-                        </div>
-                    </div>
-                    <div className="submit-container">
-                        <div className="submit">Sign Up</div>
-                        <div className="submit" onClick={() => login()}>Login</div>
-                    </div>
-                </div>
-                :
-                <div className="container">
-                    <div className="header">
-                        <div className="text">Log In</div>
-                        <div className="underline"></div>
-                    </div>
-                    <div className="inputs">
-                        <div className="input">
-                            <input type="text" placeholder='username...'/>
-                        </div>
-                        <div className="input">
-                            <input type="password" placeholder='password...' />
-                        </div>
-                    </div>
-                    <div className="submit-container">
-                        <div className="submit" onClick={() => Register()}>Sign Up</div>
-                        <div className="submit">Login</div>
-                    </div>
-                </div>
-            }
         </div>
     );
 }

@@ -2,14 +2,14 @@ import { faGrip, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import userState from "../atoms/UserAtom";
+import UserRole from "../atoms/UserRole";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 function SalesManage() {
 
-    const [userInfo, setUserInfo] = useRecoilState(userState);
+    const [userRole, setUserRole] = useRecoilState(UserRole);
 
     const sales_url = "http://localhost:9000/sales";
     const [sales, setSales] = useState([]);
@@ -20,7 +20,7 @@ function SalesManage() {
 
     const deleteSale = (sale) => {
         Swal.fire({
-            title: `Are you sure to Delete "${sale.id}"?`,
+            title: `You sure you want to Delete\nProduct: "${sale.productName}" \nID:"${sale.id}"?`,
             showCancelButton: true
         }).then((data) => {
             if (data.isConfirmed) {
@@ -40,7 +40,7 @@ function SalesManage() {
                             <h4>All Sales</h4>
                         </div>
                         {
-                            (userInfo.role == 'admin')
+                            (userRole == 'admin')
                             &&
                         <Link to={'/sales/manage/add'} className="btn btn-secondary">Add Sale</Link>
                         }
@@ -56,8 +56,8 @@ function SalesManage() {
                                     <th className="col-2">Total</th>
                                     <th className="col-2">Date</th>
                                     {
-                                        (userInfo.role == 'admin' ||
-                                        userInfo.role == 'special')
+                                        (userRole == 'admin' ||
+                                        userRole == 'special')
                                         &&
                                         <th className="col-1">Actions</th>
                                     }
@@ -75,8 +75,8 @@ function SalesManage() {
                                             <td> {sale?.totalPrice} </td>
                                             <td> {sale?.createdAt.slice(0, 10)} </td>
                                             {
-                                                (userInfo.role == 'admin' ||
-                                                userInfo.role == 'special')
+                                                (userRole == 'admin' ||
+                                                userRole == 'special')
                                                 &&
                                                 <td className="actions">
                                                     <Link to={`/sales/manage/edit/${sale.id}`} className="btn btn-warning btn-sm">

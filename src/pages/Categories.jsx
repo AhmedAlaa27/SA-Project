@@ -1,17 +1,17 @@
 import { faGrip, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRecoilState } from 'recoil';
-import userState from '../atoms/UserAtom';
+import UserRole from '../atoms/UserRole';
 
 function Categories() {
 
-    const [userInfo, setUserInfo] = useRecoilState(userState);
+    const [userRole, setUserRole] = useRecoilState(UserRole);
 
     return (
         <div className="categories">
             <div className="container">
                 {
-                    (userInfo.role == 'admin'
+                    (userRole == 'admin'
                     )
                     &&
                     <div className="card card-1">
@@ -26,9 +26,9 @@ function Categories() {
                     </div>
                 }
                 {
-                    (userInfo.role == 'admin' ||
-                     userInfo.role == 'special' || 
-                     userInfo.role == 'user'
+                    (userRole == 'admin' ||
+                     userRole == 'special' || 
+                     userRole == 'user'
                     )
                     &&
                     <div className="card card-2">
@@ -43,8 +43,8 @@ function Categories() {
                                         <th className="col-1">#</th>
                                         <th className="col-9">Categories</th>
                                         {
-                                            (userInfo.role == 'admin' ||
-                                             userInfo.role == 'special')
+                                            (userRole == 'admin' ||
+                                             userRole == 'special')
                                             &&
                                             <th className="col-2">Actions</th>
                                         }
@@ -55,8 +55,8 @@ function Categories() {
                                         <th>1</th>
                                         <td>Cars</td>
                                         {
-                                            (userInfo.role == 'admin' ||
-                                             userInfo.role == 'special')
+                                            (userRole == 'admin' ||
+                                             userRole == 'special')
                                             &&
                                             <td className="actions">
                                                 <button className="btn btn-warning btn-sm">
@@ -72,8 +72,8 @@ function Categories() {
                                         <th>2</th>
                                         <td>Machines</td>
                                         {
-                                            (userInfo.role == 'admin' ||
-                                             userInfo.role == 'special')
+                                            (userRole == 'admin' ||
+                                             userRole == 'special')
                                              &&
                                             <td className="actions">
                                                 <button className="btn btn-warning btn-sm">
@@ -89,8 +89,8 @@ function Categories() {
                                         <th>3</th>
                                         <td>Motors</td>
                                         {
-                                            (userInfo.role == 'admin' ||
-                                             userInfo.role == 'special')
+                                            (userRole == 'admin' ||
+                                             userRole == 'special')
                                              &&
                                             <td className="actions">
                                                 <button className="btn btn-warning btn-sm">
@@ -106,8 +106,8 @@ function Categories() {
                                         <th>4</th>
                                         <td>Refregirators</td>
                                         {
-                                            (userInfo.role == 'admin' ||
-                                             userInfo.role == 'special')
+                                            (userRole == 'admin' ||
+                                             userRole == 'special')
                                              &&
                                             <td className="actions">
                                                 <button className="btn btn-warning btn-sm">
