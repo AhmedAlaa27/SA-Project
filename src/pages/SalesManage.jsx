@@ -4,17 +4,26 @@ import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import UserRole from "../atoms/UserRole";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Swal from "sweetalert2";
 import Layout from "../components/Layout";
+import api from "../api/api";
 
 function SalesManage() {
 
     const [userRole, setUserRole] = useRecoilState(UserRole);
 
-    const sales_url = "http://localhost:9000/sales";
     const [sales, setSales] = useState([]);
-    const getSales = () => { axios.get(sales_url).then((data) => setSales(data.data)) };
+
+    const getSales = async () => {
+        try {
+            const res = await api.get('/sale/list');
+            setSales(res.data);
+            console.log(sales);
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
     useEffect(() => {
         getSales();
     }, []);
@@ -25,7 +34,7 @@ function SalesManage() {
             showCancelButton: true
         }).then((data) => {
             if (data.isConfirmed) {
-                axios.delete(`http://localhost:9000/sales/${sale.id}`)
+                api.delete(`/sale/delete/${sale.id}`)
                     .then(() => getSales())
             }
         })
@@ -58,8 +67,7 @@ function SalesManage() {
                                         <th className="col-2">Total</th>
                                         <th className="col-2">Date</th>
                                         {
-                                            (userRole == 'admin' ||
-                                                userRole == 'special')
+                                            (userRole == 'admin')
                                             &&
                                             <th className="col-1">Actions</th>
                                         }
@@ -71,14 +79,13 @@ function SalesManage() {
                                             return (
                                                 <tr key={sale?.id}>
                                                     <th> {sale?.id} </th>
-                                                    <td> {sale?.productName} </td>
-                                                    <td> {sale?.productPrice} </td>
+                                                    <td> {sale?.product?.name} </td>
+                                                    <td> {sale?.product?.price} </td>
                                                     <td> {sale?.quantity} </td>
                                                     <td> {sale?.totalPrice} </td>
                                                     <td> {sale?.createdAt.slice(0, 10)} </td>
                                                     {
-                                                        (userRole == 'admin' ||
-                                                            userRole == 'special')
+                                                        (userRole == 'admin')
                                                         &&
                                                         <td className="actions">
                                                             <Link to={`/sales/manage/edit/${sale.id}`} className="btn btn-warning btn-sm">

@@ -134,7 +134,8 @@
 .profile .container,
 .users-add .container,
 .sales-add .container,
-.sales-edit .container {
+.sales-edit .container,
+.users-edit .container {
   padding-top: 60px;
   display: flex;
   flex-direction: column;
@@ -157,7 +158,8 @@
 .profile .container .card-header,
 .users-add .container .card-header,
 .sales-add .container .card-header,
-.sales-edit .container .card-header {
+.sales-edit .container .card-header,
+.users-edit .container .card-header {
   margin: 10px 0;
   display: flex;
   align-items: center;
@@ -172,7 +174,8 @@
 .profile .container .card-header h4,
 .users-add .container .card-header h4,
 .sales-add .container .card-header h4,
-.sales-edit .container .card-header h4 {
+.sales-edit .container .card-header h4,
+.users-edit .container .card-header h4 {
   padding-left: 10px;
 }
 .categories .container .card-header .icon,
@@ -183,7 +186,8 @@
 .profile .container .card-header .icon,
 .users-add .container .card-header .icon,
 .sales-add .container .card-header .icon,
-.sales-edit .container .card-header .icon {
+.sales-edit .container .card-header .icon,
+.users-edit .container .card-header .icon {
   font-size: 25px;
   padding-bottom: 5px;
 }
@@ -193,8 +197,9 @@
 .sales-manage .container .card-body input,
 .profile .container .card-body input,
 .users-add .container .card-body input,
-.sales-add .container .card-header input,
-.sales-edit .container .card-header input {
+.sales-add .container .card-body input,
+.sales-edit .container .card-body input,
+.users-edit .container .card-body input {
   margin-bottom: 20px;
 }
 .categories .container .card-2 ,
@@ -218,7 +223,8 @@
 .sales-daily .container .card-2,
 .users-add .container .card-2,
 .sales-add .container .card-2,
-.sales-edit .container .card-2 {
+.sales-edit .container .card-2,
+.users-edit .container .card-2 {
   width: 100%;
 }
 .sales-manage .container .card-2 .card-header,
@@ -235,7 +241,8 @@
 .sales-daily .container .card-header .icon-side,
 .users-add .container .card-header .icon-side,
 .sales-add .container .card-header .icon-side,
-.sales-edit .container .card-header .icon-side {
+.sales-edit .container .card-header .icon-side,
+.users-edit .container .card-header .icon-side {
   display: flex;
   align-items: center;
 }
@@ -245,7 +252,8 @@
 .sales-daily .container .card-header .icon,
 .users-add .container .card-header .icon,
 .sales-add .container .card-header .icon,
-.sales-edit .container .card-header .icon {
+.sales-edit .container .card-header .icon,
+.users-edit .container .card-header .icon {
   font-size: 25px;
   padding-bottom: 5px;
 }

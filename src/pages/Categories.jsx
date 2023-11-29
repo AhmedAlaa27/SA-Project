@@ -1,16 +1,71 @@
 import { faGrip, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRecoilState } from 'recoil';
-import UserRole from '../atoms/UserRole';
+import { Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import UserRole from "../atoms/UserRole";
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import Layout from "../components/Layout";
+import api from "../api/api";
 
 function Categories() {
 
     const [userRole, setUserRole] = useRecoilState(UserRole);
 
+    const [categories, setCategories] = useState([]);
+    const getCategories = async () => {
+        try {
+            const res = await api.get('/category/list');
+            setCategories(res.data);
+        } catch(e) {
+            console.log(e);
+        }
+    }
+    useEffect(() => {
+        getCategories();
+    }, []);
+
+    const deleteCat = (cat) => {
+        Swal.fire({
+            title: `You sure you want to Delete\nCategory: "${cat.name}"?`,
+            showCancelButton: true
+        }).then((data) => {
+            if (data.isConfirmed) {
+                api.delete(`/category/delete/${cat.id}`)
+                    .then(() => getCategories())
+            }
+        })
+    };
+
+    const [ catName, setCatName ] = useState('');
+
+    const addCat = async () => {
+        try {
+            const res = await api.post('/category/create', {
+                name: catName
+            });
+            getCategories();
+            console.log(res.data);
+        } catch(e) {
+            switch(e.respose?.status) {
+                case 400: 
+                    alert('Please, Enter Valid Data');
+                    break;
+                default:
+                    alert('Some Error Has Happend, Try Again Later');
+                    break;
+            }
+        }
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setCatName('');
+        addCat();
+    }
+
     return (
         <Layout>
-
             <div className="categories">
                 <div className="container">
                     {
@@ -23,8 +78,10 @@ function Categories() {
                                 <h4>Add New Category</h4>
                             </div>
                             <div className="card-body">
-                                <input type="text" class="form-control" placeholder="Category Name" aria-label="Username" aria-describedby="basic-addon1" />
-                                <button className="btn btn-secondary w-25 btn-sm">Add Category</button>
+                                <form onSubmit={handleSubmit}>
+                                    <input value={catName} required onChange={(e) => setCatName(e.target.value)} type="text" className="form-control" placeholder="Category Name" aria-label="Username" aria-describedby="basic-addon1" />
+                                    <button type="submit" className="btn btn-secondary w-25 btn-sm">Add Category</button>
+                                </form>
                             </div>
                         </div>
                     }
@@ -54,74 +111,28 @@ function Categories() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th>1</th>
-                                            <td>Cars</td>
-                                            {
-                                                (userRole == 'admin' ||
-                                                    userRole == 'special')
-                                                &&
-                                                <td className="actions">
-                                                    <button className="btn btn-warning btn-sm">
-                                                        <FontAwesomeIcon icon={faPenToSquare} />
-                                                    </button>
-                                                    <button className="btn btn-danger btn-sm">
-                                                        <FontAwesomeIcon icon={faTrash} />
-                                                    </button>
-                                                </td>
-                                            }
-                                        </tr>
-                                        <tr>
-                                            <th>2</th>
-                                            <td>Machines</td>
-                                            {
-                                                (userRole == 'admin' ||
-                                                    userRole == 'special')
-                                                &&
-                                                <td className="actions">
-                                                    <button className="btn btn-warning btn-sm">
-                                                        <FontAwesomeIcon icon={faPenToSquare} />
-                                                    </button>
-                                                    <button className="btn btn-danger btn-sm">
-                                                        <FontAwesomeIcon icon={faTrash} />
-                                                    </button>
-                                                </td>
-                                            }
-                                        </tr>
-                                        <tr>
-                                            <th>3</th>
-                                            <td>Motors</td>
-                                            {
-                                                (userRole == 'admin' ||
-                                                    userRole == 'special')
-                                                &&
-                                                <td className="actions">
-                                                    <button className="btn btn-warning btn-sm">
-                                                        <FontAwesomeIcon icon={faPenToSquare} />
-                                                    </button>
-                                                    <button className="btn btn-danger btn-sm">
-                                                        <FontAwesomeIcon icon={faTrash} />
-                                                    </button>
-                                                </td>
-                                            }
-                                        </tr>
-                                        <tr>
-                                            <th>4</th>
-                                            <td>Refregirators</td>
-                                            {
-                                                (userRole == 'admin' ||
-                                                    userRole == 'special')
-                                                &&
-                                                <td className="actions">
-                                                    <button className="btn btn-warning btn-sm">
-                                                        <FontAwesomeIcon icon={faPenToSquare} />
-                                                    </button>
-                                                    <button className="btn btn-danger btn-sm">
-                                                        <FontAwesomeIcon icon={faTrash} />
-                                                    </button>
-                                                </td>
-                                            }
-                                        </tr>
+                                    {
+                                        categories.map((cat) => {
+                                            return (
+                                                <tr key={cat?.id}>
+                                                    <th> {cat?.id} </th>
+                                                    <td> {cat?.name} </td>
+                                                    {
+                                                        (userRole == 'admin')
+                                                        &&
+                                                        <td className="actions">
+                                                            <Link to={`/Categories/manage/edit/${cat.id}`} className="btn btn-warning btn-sm">
+                                                                <FontAwesomeIcon icon={faPenToSquare} />
+                                                            </Link>
+                                                            <button onClick={() => deleteCat(cat)} className="btn btn-danger btn-sm">
+                                                                <FontAwesomeIcon icon={faTrash} />
+                                                            </button>
+                                                        </td>
+                                                    }
+                                                </tr>
+                                            )
+                                        })
+                                    }
                                     </tbody>
                                 </table>
                             </div>

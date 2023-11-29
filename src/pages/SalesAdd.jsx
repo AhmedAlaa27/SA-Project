@@ -4,44 +4,40 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Layout from "../components/Layout";
+import api from "../api/api";
 
 function SalesAdd() {
 
-    const sales_url = "http://localhost:9000/sales";
-    const [sales, setSales] = useState([]);
-    const getSales = () => { axios.get(sales_url).then((data) => setSales(data.data)) };
-    useEffect(() => {
-        getSales();
-    }, []);
-
-    const today = new Date();
-    const month = today.getMonth() + 1;
-    const year = today.getFullYear();
-    const day = today.getDate();
-    const currentDate = year + "-" + month + "-" + day;
-
-    const [productName, setProductName] = useState('');
-    const [productPrice, setProductPrice] = useState('');
-    const [quantity, setQuantity] = useState('');
-    const [totalPrice, setTotalPrice] = useState('');
+    const [productID, setProductID] = useState(0);
+    const [quantity, setQuantity] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     let navigate = useNavigate();
 
+    const addSale = async () => {
+        try {
+            const res = await api.post('/sale/create/', {
+                quantity: quantity,
+                totalPrice: totalPrice,
+                productID: productID,
+            });
+            console.log(res.data);
+            navigate('/sales/manage');
+        } catch(e) {
+            switch (e.response?.status) {
+                case 400:
+                    alert('Please, Enter Valid Data');
+                    break;
+                default:
+                    alert("Some error happend, try again later");
+                    break;
+            }
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        axios.post('http://localhost:9000/sales', {
-            id: sales.length + 1,
-            quantity: quantity,
-            totalPrice: totalPrice,
-            productName: productName,
-            productPrice: productPrice,
-            createdAt: currentDate
-        })
-            .then((data) => {
-                console.log(data);
-                navigate('/sales/manage');
-            })
+        addSale();
     }
 
     return (
@@ -55,20 +51,9 @@ function SalesAdd() {
                         </div>
                         <div className="card-body">
                             <form onSubmit={handleSubmit}>
-                                <input type="text" value={sales.length + 1} disabled className="form-control mb-4" placeholder="ID" aria-label="productName" aria-describedby="basic-addon1" />
-                                <input type="text" onChange={(e) => setProductName(e.target.value)} className="form-control mb-4" placeholder="Product-Name" aria-label="productName" aria-describedby="basic-addon1" />
-                                <div className="input-group mb-4">
-                                    <span className="input-group-text">$</span>
-                                    <input onChange={(e) => setProductPrice(e.target.value)} placeholder="Product-Price" type="text" className="form-control" aria-label="Amount (to the nearest dollar)" />
-                                </div>
-                                <div className="input-group mb-4">
-                                    <input onChange={(e) => setQuantity(e.target.value)} type="text" className="form-control" placeholder="Quantity" aria-label="quantity" aria-describedby="basic-addon1" />
-                                    <span className="input-group-text">Products</span>
-                                </div>
-                                <div className="input-group mb-4">
-                                    <span className="input-group-text">$</span>
-                                    <input onChange={(e) => setTotalPrice(e.target.value)} placeholder="Total-Price" type="text" className="form-control" aria-label="Amount (to the nearest dollar)" />
-                                </div>
+                                <input required type="number" onChange={(e) => setProductID(e.target.value)} className="form-control mb-4" placeholder="Product-ID" aria-label="productName" aria-describedby="basic-addon1" />
+                                <input required onChange={(e) => setQuantity(e.target.value)} type="number" className="form-control" placeholder="Quantity" aria-label="quantity" aria-describedby="basic-addon1" />
+                                <input required onChange={(e) => setTotalPrice(e.target.value)} placeholder="Total-Price" type="number" className="form-control" aria-label="Amount (to the nearest dollar)" />
                                 <button className="btn btn-secondary w-25">Add</button>
                             </form>
                         </div>

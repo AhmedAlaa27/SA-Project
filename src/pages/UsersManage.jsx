@@ -2,7 +2,38 @@ import { faGrip, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import api from "../api/api";
 function UsersManage() {
+
+    const [users, setUsers] = useState([]);
+
+    const getUsers = async () => {
+        try {
+            const res = await api.get('/user/list');
+            setUsers(res.data);
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
+    useEffect(() => {
+        getUsers();
+    }, []);
+
+    const deleteUser = (user) => {
+        Swal.fire({
+            title: `You sure you want to Delete: "${user.name}"?`,
+            showCancelButton: true
+        }).then((data) => {
+            if (data.isConfirmed) {
+                api.delete(`/user/delete/${user.id}`)
+                    .then(() => getUsers())
+            }
+        })
+    };
+
     return (
         <Layout>
             <div className="users-manage">
@@ -20,74 +51,35 @@ function UsersManage() {
                                 <thead>
                                     <tr>
                                         <th className="col-1">#</th>
-                                        <th className="col-3">Username</th>
-                                        <th className="col-3">Password</th>
+                                        <th className="col-2">Username</th>
+                                        <th className="col-3">Email</th>
                                         <th className="col-2">User Role</th>
-                                        <th className="col-1">Status</th>
+                                        <th className="col-3">Password</th>
                                         <th className="col-1">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th>1</th>
-                                        <td>Admin</td>
-                                        <td>admin</td>
-                                        <td>Admin</td>
-                                        <td className="status"><button className="btn btn-sm btn-success disabled">Active</button></td>
-                                        <td className="actions">
-                                            <button className="btn btn-warning btn-sm">
-                                                <FontAwesomeIcon icon={faPenToSquare} />
-                                            </button>
-                                            <button className="btn btn-danger btn-sm">
-                                                <FontAwesomeIcon icon={faTrash} />
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>2</th>
-                                        <td>User</td>
-                                        <td>user1</td>
-                                        <td>User</td>
-                                        <td className="status"><button className="btn btn-sm btn-success disabled">Active</button></td>
-                                        <td className="actions">
-                                            <button className="btn btn-warning btn-sm">
-                                                <FontAwesomeIcon icon={faPenToSquare} />
-                                            </button>
-                                            <button className="btn btn-danger btn-sm">
-                                                <FontAwesomeIcon icon={faTrash} />
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>3</th>
-                                        <td>User</td>
-                                        <td>user2</td>
-                                        <td>User</td>
-                                        <td className="status"><button className="btn btn-sm btn-success disabled">Active</button></td>
-                                        <td className="actions">
-                                            <button className="btn btn-warning btn-sm">
-                                                <FontAwesomeIcon icon={faPenToSquare} />
-                                            </button>
-                                            <button className="btn btn-danger btn-sm">
-                                                <FontAwesomeIcon icon={faTrash} />
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>4</th>
-                                        <td>Special</td>
-                                        <td>special</td>
-                                        <td>Special</td>
-                                        <td className="status"><span className="btn btn-sm btn-success disabled">Active</span></td>
-                                        <td className="actions">
-                                            <button className="btn btn-warning btn-sm">
-                                                <FontAwesomeIcon icon={faPenToSquare} />
-                                            </button>
-                                            <button className="btn btn-danger btn-sm">
-                                                <FontAwesomeIcon icon={faTrash} />
-                                            </button>
-                                        </td>
-                                    </tr>
+                                {
+                                    users.map((user) => {
+                                        return (
+                                            <tr key={user?.id}>
+                                                <th> {user?.id} </th>
+                                                <td> {user?.name} </td>
+                                                <td> {user?.email} </td>
+                                                <td> {user?.role} </td>
+                                                <td> {user?.password} </td>
+                                                <td className="actions">
+                                                    <Link to={`/users/manage/edit/${user.id}`} className="btn btn-warning btn-sm">
+                                                        <FontAwesomeIcon icon={faPenToSquare} />
+                                                    </Link>
+                                                    <button onClick={() => deleteUser(user)} className="btn btn-danger btn-sm">
+                                                        <FontAwesomeIcon icon={faTrash} />
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                }
                                 </tbody>
                             </table>
                         </div>

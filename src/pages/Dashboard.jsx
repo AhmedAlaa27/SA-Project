@@ -4,26 +4,50 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
+import api from '../api/api';
 
 function Dashboard() {
-
-    const api_url = "http://localhost:9000";
-    const users_url = api_url + "/users";
-    const products_url = api_url + "/products";
-    const cats_url = api_url + "/categories";
-    const sales_url = api_url + "/sales";
 
     const [users, setUsers] = useState({});
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [sales, setSales] = useState([]);
 
-    const getUsers = () => { axios.get(users_url).then((data) => setUsers(data.data)) };
-    const getProducts = () => { axios.get(products_url).then((data) => setProducts(data.data)) };
-    const getCategories = () => { axios.get(cats_url).then((data) => setCategories(data.data)) };
-    const getSales = () => { axios.get(sales_url).then((data) => setSales(data.data)) };
-
-    console.log(users[0]);
+    const getUsers = async () => {
+        try {
+            const res = await api.get('/user/list');
+            setUsers(res.data);
+        } catch(e) {
+            console.log(e);
+        }
+    }
+    const getProducts = async () => {
+        try {
+            const res = await api.get('/product/list');
+            setProducts(res.data);
+            console.log(sales);
+        } catch(e) {
+            console.log(e);
+        }
+    }
+    const getCategories = async () => {
+        try {
+            const res = await api.get('/category/list');
+            setCategories(res.data);
+            console.log(sales);
+        } catch(e) {
+            console.log(e);
+        }
+    }
+    const getSales = async () => {
+        try {
+            const res = await api.get('/sale/list');
+            setSales(res.data);
+            console.log(sales);
+        } catch(e) {
+            console.log(e);
+        }
+    }
 
     useEffect(() => {
         getUsers();
@@ -43,7 +67,7 @@ function Dashboard() {
                             </div>
                             <div className="content">
                                 <h2> {users.length} </h2>
-                                <p> users </p>
+                                <p>users</p>
                             </div>
                         </div>
                         <div className="col box">
