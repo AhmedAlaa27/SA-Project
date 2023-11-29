@@ -3,62 +3,61 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faUser, faBarsStaggered, faBorderAll, faImage, faChartBar, faSignal } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import UserRole from '../atoms/UserRole';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
 function Sidebar() {
-
-    const [ userRole, setUserRole ] = useRecoilState(UserRole);
-
+    const { user } = useContext(AuthContext);
     return (
         <div className="sidebar bg-dark">
             <ul className="list-group list-group-flush">
                 <div className="container">
-                        {(userRole == 'admin' 
-                         || userRole == 'special')
+                    {(user?.role == 'ADMIN'
+                        || user?.role == 'SPECIAL')
                         &&
                         <li className="list-group-item pt-3 pb-3 fw-bold text-bg-dark">
                             <FontAwesomeIcon className='icon' icon={faHouse} beat />
                             <Link className='span' to={'/dashboard'}>Dashboard</Link>
                         </li>}
-                        
-                        {(userRole == 'admin') &&
+
+                    {(user?.role == 'ADMIN') &&
                         <li className="list-group-item pt-3 pb-3 fw-bold text-bg-dark">
                             <FontAwesomeIcon className='icon' icon={faUser} beat />
                             <Link className='span' to={'/users/manage'}>Users Management</Link>
                         </li>}
 
-                        {(userRole == 'admin'
-                         || userRole == 'special'
-                         || userRole == 'user') 
-                         &&
+                    {(user?.role == 'ADMIN'
+                        || user?.role == 'SPECIAL'
+                        || user?.role == 'USER')
+                        &&
                         <li className="list-group-item pt-3 pb-3 fw-bold text-bg-dark">
-                        <FontAwesomeIcon className='icon'  icon={faBarsStaggered} beat />
+                            <FontAwesomeIcon className='icon' icon={faBarsStaggered} beat />
                             <Link className='span' to={'/categories'}>Categories</Link>
                         </li>}
 
-                        {(userRole == 'admin'
-                         || userRole == 'special'
-                         || userRole == 'user') 
-                         &&                        
+                    {(user?.role == 'ADMIN'
+                        || user?.role == 'SPECIAL'
+                        || user?.role == 'USER')
+                        &&
                         <li className="list-group-item pt-3 pb-3 fw-bold text-bg-dark">
                             <FontAwesomeIcon className='icon' icon={faBorderAll} beat />
                             <Link className='span' to={'/products/manage'}>Products</Link>
                         </li>}
 
-                        {(userRole == 'admin'
-                         || userRole == 'special'
-                         || userRole == 'user') 
-                         &&                         
+                    {(user?.role == 'ADMIN'
+                        || user?.role == 'SPECIAL'
+                        || user?.role == 'USER')
+                        &&
                         <li className="list-group-item pt-3 pb-3 fw-bold text-bg-dark">
                             <FontAwesomeIcon className='icon' icon={faChartBar} beat />
-                            <Link className='span' to={'/sales/manage'}>{(userRole == 'admin' || userRole == 'special') && 'Manage'} Sales</Link>
+                            <Link className='span' to={'/sales/manage'}>{(user?.role == 'ADMIN' || user?.role == 'SPECIAL') && 'Manage'} Sales</Link>
                         </li>}
 
-                        {(userRole == 'admin'
-                         || userRole == 'special') 
-                         && 
+                    {(user?.role == 'ADMIN'
+                        || user?.role == 'SPECIAL')
+                        &&
                         <li className="list-group-item pt-3 pb-3 fw-bold text-bg-dark">
-                        <FontAwesomeIcon className='icon' icon={faSignal} beat />
+                            <FontAwesomeIcon className='icon' icon={faSignal} beat />
                             <span className='span'>
                                 <a className="toggle-link" data-bs-toggle="collapse" href="#collapseSalesReport" role="button" aria-expanded="false" aria-controls="collapseExample">
                                     Sales

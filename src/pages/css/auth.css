@@ -1,0 +1,36 @@
+ .auth {
+     width: 100%;
+     height: 100vh;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     background-color: #e1e1e1;
+ }
+
+ .auth .form {
+     background-color: white;
+     padding: 20px;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     gap: 20px;
+     width: 400px;
+ }
+
+ .auth .form div {
+     width: 100%;
+ }
+
+ .auth .form .title {
+     font-weight: bold;
+ }
+
+ .auth .form .error {
+     color: red;
+     text-align: center;
+ }
+
+ .auth .form .error.root {
+     font-size: 1.1em;
+ }

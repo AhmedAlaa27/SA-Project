@@ -6,6 +6,7 @@ import UserRole from "../atoms/UserRole";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Layout from "../components/Layout";
 
 function SalesManage() {
 
@@ -13,7 +14,7 @@ function SalesManage() {
 
     const sales_url = "http://localhost:9000/sales";
     const [sales, setSales] = useState([]);
-    const getSales = () => {axios.get(sales_url).then((data)=> setSales(data.data))};
+    const getSales = () => { axios.get(sales_url).then((data) => setSales(data.data)) };
     useEffect(() => {
         getSales();
     }, []);
@@ -25,78 +26,80 @@ function SalesManage() {
         }).then((data) => {
             if (data.isConfirmed) {
                 axios.delete(`http://localhost:9000/sales/${sale.id}`)
-                .then(() => getSales())
+                    .then(() => getSales())
             }
         })
     };
 
     return (
-        <div className="sales-manage">
-            <div className="container">
-                <div className="card card-2">
-                    <div className="card-header">
-                        <div className="icon-side">
-                            <FontAwesomeIcon className="icon" icon={faGrip} />
-                            <h4>All Sales</h4>
+        <Layout>
+            <div className="sales-manage">
+                <div className="container">
+                    <div className="card card-2">
+                        <div className="card-header">
+                            <div className="icon-side">
+                                <FontAwesomeIcon className="icon" icon={faGrip} />
+                                <h4>All Sales</h4>
+                            </div>
+                            {
+                                (userRole == 'admin')
+                                &&
+                                <Link to={'/sales/manage/add'} className="btn btn-secondary">Add Sale</Link>
+                            }
                         </div>
-                        {
-                            (userRole == 'admin')
-                            &&
-                        <Link to={'/sales/manage/add'} className="btn btn-secondary">Add Sale</Link>
-                        }
-                    </div>
-                    <div className="card-body">
-                        <table className="table table-striped table-hover table-bordered">
-                            <thead>
-                                <tr>
-                                    <th className="col-1">#</th>
-                                    <th className="col-2">Product Name</th>
-                                    <th className="col-2">Product Price</th>
-                                    <th className="col-2">Quantity</th>
-                                    <th className="col-2">Total</th>
-                                    <th className="col-2">Date</th>
-                                    {
-                                        (userRole == 'admin' ||
-                                        userRole == 'special')
-                                        &&
-                                        <th className="col-1">Actions</th>
-                                    }
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    sales.map((sale) => {
-                                        return (
-                                            <tr key={sale?.id}>
-                                            <th> {sale?.id} </th>
-                                            <td> {sale?.productName} </td>
-                                            <td> {sale?.productPrice} </td>
-                                            <td> {sale?.quantity} </td>
-                                            <td> {sale?.totalPrice} </td>
-                                            <td> {sale?.createdAt.slice(0, 10)} </td>
-                                            {
-                                                (userRole == 'admin' ||
+                        <div className="card-body">
+                            <table className="table table-striped table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th className="col-1">#</th>
+                                        <th className="col-2">Product Name</th>
+                                        <th className="col-2">Product Price</th>
+                                        <th className="col-2">Quantity</th>
+                                        <th className="col-2">Total</th>
+                                        <th className="col-2">Date</th>
+                                        {
+                                            (userRole == 'admin' ||
                                                 userRole == 'special')
-                                                &&
-                                                <td className="actions">
-                                                    <Link to={`/sales/manage/edit/${sale.id}`} className="btn btn-warning btn-sm">
-                                                        <FontAwesomeIcon icon={faPenToSquare} />
-                                                    </Link>
-                                                    <button onClick={() => deleteSale(sale)} className="btn btn-danger btn-sm">
-                                                        <FontAwesomeIcon icon={faTrash} />
-                                                    </button>
-                                                </td>
-                                            }
-                                        </tr>
-                                        )
-                                    })
-                                }
-                            </tbody>
-                        </table>
+                                            &&
+                                            <th className="col-1">Actions</th>
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        sales.map((sale) => {
+                                            return (
+                                                <tr key={sale?.id}>
+                                                    <th> {sale?.id} </th>
+                                                    <td> {sale?.productName} </td>
+                                                    <td> {sale?.productPrice} </td>
+                                                    <td> {sale?.quantity} </td>
+                                                    <td> {sale?.totalPrice} </td>
+                                                    <td> {sale?.createdAt.slice(0, 10)} </td>
+                                                    {
+                                                        (userRole == 'admin' ||
+                                                            userRole == 'special')
+                                                        &&
+                                                        <td className="actions">
+                                                            <Link to={`/sales/manage/edit/${sale.id}`} className="btn btn-warning btn-sm">
+                                                                <FontAwesomeIcon icon={faPenToSquare} />
+                                                            </Link>
+                                                            <button onClick={() => deleteSale(sale)} className="btn btn-danger btn-sm">
+                                                                <FontAwesomeIcon icon={faTrash} />
+                                                            </button>
+                                                        </td>
+                                                    }
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </Layout>
     );
 }
 
