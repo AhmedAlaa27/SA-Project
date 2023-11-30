@@ -1,21 +1,30 @@
 import { faGrip } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Layout from "../components/Layout";
+import api from "../api/api";
 
 function SalesMonthly() {
 
-    const sales_url = "http://localhost:9000/sales";
     const [sales, setSales] = useState([]);
-    const getSales = () => { axios.get(sales_url).then((data) => setSales(data.data)) };
+
+    const getSales = async () => {
+        try {
+            const res = await api.get('/sale/list/monthly');
+            setSales(res.data);
+            console.log(sales);
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
     useEffect(() => {
         getSales();
     }, []);
 
     return (
         <Layout>
-            <div className="sales-monthly">
+            <div className="sales-daily">
                 <div className="container">
                     <div className="card card-2">
                         <div className="card-header">
@@ -37,12 +46,12 @@ function SalesMonthly() {
                                     {
                                         sales.map((sale) => {
                                             return (
-                                                <tr key={sale.id}>
-                                                    <th> {sale.id} </th>
-                                                    <td> {sale.productName} </td>
-                                                    <td> {sale.quantity} </td>
-                                                    <td> {sale.totalPrice} </td>
-                                                    <td> {sale.createdAt.slice(0, 7)} </td>
+                                                <tr key={sale?.id}>
+                                                    <th> {sale?.id} </th>
+                                                    <td> {sale?.product?.name} </td>
+                                                    <td> {sale?.quantity} </td>
+                                                    <td> {sale?.totalPrice} </td>
+                                                    <td> {sale?.createdAt.slice(0, 10)} </td>
                                                 </tr>
                                             )
                                         })

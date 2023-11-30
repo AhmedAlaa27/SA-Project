@@ -41,7 +41,7 @@ function App() {
       <Route path='/sales/manage/edit/:saleID' element={<SaleEdit />} />
       <Route path='/sales/mothly-sales' element={<SalesMonthly />} />
       <Route path='/sales/daily-sales' element={<SalesDaily />} />
-      <Route path='/profile' element={< Profile />} />
+      <Route path='/profile/:userID' element={< Profile />} />
     </Routes>
   );
 }

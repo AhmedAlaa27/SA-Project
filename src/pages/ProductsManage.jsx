@@ -45,8 +45,11 @@ function ProductsManage() {
         try {
             const res = await api.post('/product/create/', {
                 name: productName,
-                price: productPrice,
-                categoryId: catID
+                price: parseFloat(productPrice),
+                categoryId: parseFloat(catID)
+            },
+            {
+                headers: { "Content-type": "application/json" },
             });
             getProducts();
             console.log(res.data);
@@ -79,8 +82,8 @@ function ProductsManage() {
                         <form onSubmit={handleSubmit}>
                             <div className="card-body">
                                 <input required onChange={(e) => setProductName(e.target.value)} type="text" class="form-control" placeholder="Product Name" aria-label="Username" aria-describedby="basic-addon1" />
-                                <input required onChange={(e) => setProductPrice(e.target.value)} type="number" class="form-control" placeholder="Product Price" aria-label="Username" aria-describedby="basic-addon1" />
-                                <input required onChange={(e) => setCatID(e.target.value)} type="number" class="form-control" placeholder="Category ID" aria-label="Username" aria-describedby="basic-addon1" />
+                                <input required onChange={(e) => setProductPrice(e.target.value)} type="text" class="form-control" placeholder="Product Price" aria-label="Username" aria-describedby="basic-addon1" />
+                                <input required onChange={(e) => setCatID(e.target.value)} type="text" class="form-control" placeholder="Category ID" aria-label="Username" aria-describedby="basic-addon1" />
                                 <button type="submit" className="btn btn-secondary w-25 btn-sm">Add Product</button>
                             </div>
                         </form>

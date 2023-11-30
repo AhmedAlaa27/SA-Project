@@ -28,7 +28,7 @@ function Navbar() {
                                 <FontAwesomeIcon icon={faUser} /> <span>{user?.name}</span>
                             </a>
                             <ul className="dropdown-menu">
-                                <li><Link to={'/profile'} className="dropdown-item" href="#">Profile</Link></li>
+                                <li><Link to={`/profile/${user?.id}`} className="dropdown-item" href="#">Profile</Link></li>
                                 <li><Link className="dropdown-item" to={'/login'} onClick={logout}>Logout</Link></li>
                             </ul>
                         </li>

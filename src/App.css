@@ -135,7 +135,8 @@
 .users-add .container,
 .sales-add .container,
 .sales-edit .container,
-.users-edit .container {
+.users-edit .container,
+.cats-edit .container {
   padding-top: 60px;
   display: flex;
   flex-direction: column;
@@ -159,7 +160,8 @@
 .users-add .container .card-header,
 .sales-add .container .card-header,
 .sales-edit .container .card-header,
-.users-edit .container .card-header {
+.users-edit .container .card-header,
+.cats-edit .container .card-header {
   margin: 10px 0;
   display: flex;
   align-items: center;
@@ -175,7 +177,8 @@
 .users-add .container .card-header h4,
 .sales-add .container .card-header h4,
 .sales-edit .container .card-header h4,
-.users-edit .container .card-header h4 {
+.users-edit .container .card-header h4,
+.cats-edit .container .card-header h4 {
   padding-left: 10px;
 }
 .categories .container .card-header .icon,
@@ -187,9 +190,15 @@
 .users-add .container .card-header .icon,
 .sales-add .container .card-header .icon,
 .sales-edit .container .card-header .icon,
-.users-edit .container .card-header .icon {
+.users-edit .container .card-header .icon,
+.cats-edit .container .card-header .icon {
   font-size: 25px;
   padding-bottom: 5px;
+}
+.sales-manage .container .card-1 .card-body .inputs {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 .categories .container .card-body input,
 .products-manage .container .card-body input,
@@ -199,7 +208,8 @@
 .users-add .container .card-body input,
 .sales-add .container .card-body input,
 .sales-edit .container .card-body input,
-.users-edit .container .card-body input {
+.users-edit .container .card-body input,
+.cats-edit .container .card-body input {
   margin-bottom: 20px;
 }
 .categories .container .card-2 ,
@@ -224,7 +234,8 @@
 .users-add .container .card-2,
 .sales-add .container .card-2,
 .sales-edit .container .card-2,
-.users-edit .container .card-2 {
+.users-edit .container .card-2,
+.cats-edit .container .card-2 {
   width: 100%;
 }
 .sales-manage .container .card-2 .card-header,
@@ -242,7 +253,8 @@
 .users-add .container .card-header .icon-side,
 .sales-add .container .card-header .icon-side,
 .sales-edit .container .card-header .icon-side,
-.users-edit .container .card-header .icon-side {
+.users-edit .container .card-header .icon-side,
+.cats-edit .container .card-header .icon-side {
   display: flex;
   align-items: center;
 }
@@ -253,7 +265,8 @@
 .users-add .container .card-header .icon,
 .sales-add .container .card-header .icon,
 .sales-edit .container .card-header .icon,
-.users-edit .container .card-header .icon {
+.users-edit .container .card-header .icon,
+.cats-edit .container .card-header .icon {
   font-size: 25px;
   padding-bottom: 5px;
 }

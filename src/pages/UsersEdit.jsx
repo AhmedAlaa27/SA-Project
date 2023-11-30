@@ -1,4 +1,4 @@
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping, faGrip } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -13,16 +13,32 @@ function UsersEdit() {
 
   const [ name, setName ] = useState('');
   const [ email, setEmail ] = useState('');
-  const [ role, setRole ] = useState('user');
-  const [ password, setPassword ] = useState('');
   
   const [ users, setUsers ] = useState([]);
+
+  const getUser = () => {
+    users.map((user) => {
+      if (user.id == userID) {
+        setName = user.name;
+        setEmail = user.email;
+      }
+    })
+  }
+
   const getUsers = async () => {
     try {
-        const res = await api.get('/user/profile');
-        setUsers(res.data);
-    } catch(e) {
-        console.log(e);
+        const res = await api.get('/user/list');
+        setUsers(res.data); 
+        getUser();
+      } catch(e) {
+        switch (e.response?.status) {
+            case 400:
+                alert('Please, Enter Valid Data');
+                break;
+            default:
+                alert("Some error happend, try again later");
+                break;
+        }
     }
   }
 
@@ -30,19 +46,29 @@ function UsersEdit() {
       getUsers();
   }, []);
 
+  const updateUser = async () => {
+    try {
+      const res = await api.put(`/user/update/${userID}`, {
+        name: name,
+        email: email
+      });
+      console.log(res);
+      navigate('/users/manage');
+    } catch(e) {
+      switch(e.response?.status) {
+        case 400: 
+          alert('Please, Enter Valid Data');
+          break;
+        default:
+          alert('Some Error Happend, Try Again Later');
+          break;
+      }
+    }
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const updatedUser = {
-      ...users,
-      name: name,
-      email: email,
-      role: role,
-      password: password
-  };
-
-  axios.put(`http://localhost:9000/users/${userID}`, updatedUser)
-      .then((data) => navigate('/users/manage'));
+    updateUser();
   }
 
   return (
@@ -51,16 +77,14 @@ function UsersEdit() {
           <div className="container">
               <div className="card card-2">
                   <div className="card-header">
-                      <FontAwesomeIcon className="icon" icon={faCartShopping} />
+                      <FontAwesomeIcon className="icon" icon={faGrip} />
                       <h4>Edit User</h4>
                   </div>
                   <div className="card-body">
                     <form onSubmit={handleSubmit}>
-                      <input disabled type="text" value={users.id} className="form-control mb-4" placeholder="ID" aria-label="productName" aria-describedby="basic-addon1" />
+                      <input disabled type="text" value={userID} className="form-control mb-4" placeholder="ID" aria-label="productName" aria-describedby="basic-addon1" />
                       <input value={name} onChange={(e) => setName(e.target.value)} type="text" className="form-control" placeholder="Username" aria-label="username" aria-describedby="basic-addon1" />
                       <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="form-control" placeholder="Email" aria-label="password" aria-describedby="basic-addon1" />
-                      <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" className="form-control" placeholder="password" aria-label="password" aria-describedby="basic-addon1" />
-                      <input value={role} onChange={(e) => setRole(e.target.value)} type="text" className="form-control" placeholder="Role" aria-label="password" aria-describedby="basic-addon1" />
                       <button type="submit" className="btn btn-secondary w-25 mt-3">Edit</button>
                   </form>
                   </div>

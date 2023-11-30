@@ -17,7 +17,7 @@ function ProductsAdd() {
     let navigate = useNavigate();
 
     const checkPassword = () => {
-        if (password != confirmPassword) alert('Password must match');
+        if (password !== confirmPassword) alert('Password must match');
     }
 
     const addUser = async () => {

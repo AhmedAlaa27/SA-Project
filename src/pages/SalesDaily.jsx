@@ -1,14 +1,23 @@
 import { faGrip } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Layout from "../components/Layout";
+import api from "../api/api";
 
 function SalesDaily() {
 
-    const sales_url = "http://localhost:9000/sales";
     const [sales, setSales] = useState([]);
-    const getSales = () => { axios.get(sales_url).then((data) => setSales(data.data)) };
+
+    const getSales = async () => {
+        try {
+            const res = await api.get('/sale/list/daily');
+            setSales(res.data);
+            console.log(sales);
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
     useEffect(() => {
         getSales();
     }, []);
@@ -37,12 +46,12 @@ function SalesDaily() {
                                     {
                                         sales.map((sale) => {
                                             return (
-                                                <tr key={sale.id}>
-                                                    <th> {sale.id} </th>
-                                                    <td> {sale.productName} </td>
-                                                    <td> {sale.quantity} </td>
-                                                    <td> {sale.totalPrice} </td>
-                                                    <td> {sale.createdAt.slice(0, 10)} </td>
+                                                <tr key={sale?.id}>
+                                                    <th> {sale?.id} </th>
+                                                    <td> {sale?.product?.name} </td>
+                                                    <td> {sale?.quantity} </td>
+                                                    <td> {sale?.totalPrice} </td>
+                                                    <td> {sale?.createdAt.slice(0, 10)} </td>
                                                 </tr>
                                             )
                                         })

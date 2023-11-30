@@ -24,7 +24,7 @@ function SalesAdd() {
             console.log(res.data);
             navigate('/sales/manage');
         } catch(e) {
-            switch (e.response?.status) {
+            switch (e?.response?.status) {
                 case 400:
                     alert('Please, Enter Valid Data');
                     break;
