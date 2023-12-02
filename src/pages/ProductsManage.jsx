@@ -137,7 +137,7 @@ function ProductsManage() {
                                         <tr>
                                             <th className="col-1">#</th>
                                             <th className="col-9">Products</th>
-                                            <th className="col-2">Actions</th>
+                                            {user?.role == "ADMIN" && <th className="col-2">Actions</th>}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -147,14 +147,15 @@ function ProductsManage() {
                                                     <tr key={product?.id}>
                                                         <th> {product?.id} </th>
                                                         <td> {product?.name} </td>
-                                                        <td className="actions">
-                                                            <Link to={`/products/manage/edit/${product.id}`} className="btn btn-warning btn-sm">
-                                                                <FontAwesomeIcon icon={faPenToSquare} />
-                                                            </Link>
-                                                            <button onClick={() => deleteProduct(product)} className="btn btn-danger btn-sm">
-                                                                <FontAwesomeIcon icon={faTrash} />
-                                                            </button>
-                                                        </td>
+                                                        {user?.role == 'ADMIN' &&
+                                                            <td className="actions">
+                                                                <Link to={`/products/manage/edit/${product.id}`} className="btn btn-warning btn-sm">
+                                                                    <FontAwesomeIcon icon={faPenToSquare} />
+                                                                </Link>
+                                                                <button onClick={() => deleteProduct(product)} className="btn btn-danger btn-sm">
+                                                                    <FontAwesomeIcon icon={faTrash} />
+                                                                </button>
+                                                            </td>}
                                                     </tr>
                                                 )
                                             })
