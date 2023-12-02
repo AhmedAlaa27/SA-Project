@@ -44,8 +44,8 @@ function SaleEdit() {
         setIsUpdating(true);
         try {
             const body = {
-                quantity,
-                totalPrice
+                quantity: parseInt(quantity),
+                totalPrice: parseFloat(totalPrice)
             };
             console.log(body);
             const res = await api.put("/sale/update/" + saleID, body)

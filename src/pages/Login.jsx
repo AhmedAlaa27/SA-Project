@@ -33,6 +33,7 @@ function Login() {
             setUser(res.data);
             navigate("/");
         } catch (e) {
+            console.log(e);
             switch (e.response?.status) {
                 case 401:
                     setError("root", { message: "Login failed" });
