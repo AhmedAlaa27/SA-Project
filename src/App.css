@@ -1,0 +1,393 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins',sans-serif;
+}
+
+.main-body {
+  height: '100vh';
+  background: url(https://c4.wallpaperflare.com/wallpaper/636/636/890/line-strip-grey-background-wallpaper-preview.jpg);
+  background-size: cover;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: end;
+}
+/******************** Sidebar ********************/
+.sidebar {
+  height: 100vh;
+  margin: 0 10px 0 -15px;
+}
+.sidebar .list-group-item {
+  border: none;
+  border-bottom: 0.5px solid grey;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+}
+.sidebar .list-group-item .span {
+  padding-left: 10px;
+  text-decoration: none;
+}
+.sidebar .list-group-item .span,
+.sidebar .list-group-item .icon {
+  color: grey;
+}
+.sidebar .list-group-item .span .toggle-link {
+  border: none;
+  text-decoration: none;
+  color: grey;
+}
+.sidebar .list-group-item .toggle-list {
+  color: grey;
+  border: none;
+  border-bottom: 1px solid grey;
+  border-radius: 0;
+  font-size: 14px;
+}
+/******************** Home ********************/
+.home {
+  padding-top: 20px;
+}
+.home .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #eee;
+  height: 250px;
+}
+.home .card .box-header h1 {
+  padding: 20px;
+  font-size: 70px;
+}
+.home .card .box-text {
+  font-size: 20px;
+}
+/******************** Dashboard ********************/
+.dashboard {
+  padding-top: 40px;
+}
+.dashboard .container .row {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.dashboard .box{
+  text-align: center;
+  margin: 10px;
+  background-color: #eee;
+  height: 300px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  border-radius: 20px;
+}
+.dashboard .box .icon {
+  width: 200px;
+  height: 150px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+.dashboard .box .icon .img {
+  font-size: 60px;
+  color: #eee;
+}
+.dashboard .box .icon-1 {
+  background-color: limegreen;
+}
+.dashboard .box .icon-2 {
+  background-color: rgb(224, 54, 54);
+}
+.dashboard .box .icon-3 {
+  background-color: lightblue;
+}
+.dashboard .box .icon-4 {
+  background-color: rgb(227, 227, 12);
+}
+.dashboard .box .content {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding-left: 50px;
+  padding-top: 30px;
+}
+.dashboard .box .content p {
+  opacity: 0.7;
+}
+/******************** Categories - Products - Sales - Users - Sales_Add 
+                      Monthly_Sales - Daily_Sales - Profile ********************/
+.categories .container,
+.products-manage .container,
+.sales-manage .container,
+.users-manage .container,
+.sales-monthly .container,
+.sales-daily .container,
+.profile .container,
+.users-add .container,
+.sales-add .container,
+.sales-edit .container,
+.users-edit .container,
+.cats-edit .container {
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.categories .container .card-1,
+.products-manage .container .card-1,
+.sales-manage .container .card-1,
+.profile .container .card-1 {
+  width: 100%;
+  height: 100%;
+}
+.categories .container .card-header,
+.products-manage .container .card-header,
+.sales-manage .container .card-header,
+.sales-monthly .container .card-header,
+.sales-daily .container .card-header,
+.profile .container .card-header,
+.users-add .container .card-header,
+.sales-add .container .card-header,
+.sales-edit .container .card-header,
+.users-edit .container .card-header,
+.cats-edit .container .card-header {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #6c757d;
+}
+.categories .container .card-header h4,
+.products-manage .container .card-header h4,
+.sales-manage .container .card-header h4,
+.users-manage .container .card-header h4,
+.sales-monthly .container .card-header h4,
+.sales-daily .container .card-header h4,
+.profile .container .card-header h4,
+.users-add .container .card-header h4,
+.sales-add .container .card-header h4,
+.sales-edit .container .card-header h4,
+.users-edit .container .card-header h4,
+.cats-edit .container .card-header h4 {
+  padding-left: 10px;
+}
+.categories .container .card-header .icon,
+.products-manage .container .card-header .icon,
+.sales-manage .container .card-header .icon
+.sales-monthly .container .card-header .icon,
+.sales-daily .container .card-header .icon,
+.profile .container .card-header .icon,
+.users-add .container .card-header .icon,
+.sales-add .container .card-header .icon,
+.sales-edit .container .card-header .icon,
+.users-edit .container .card-header .icon,
+.cats-edit .container .card-header .icon {
+  font-size: 25px;
+  padding-bottom: 5px;
+}
+.sales-manage .container .card-1 .card-body .inputs {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.categories .container .card-body input,
+.products-manage .container .card-body input,
+.products-add .container .card-body input,
+.sales-manage .container .card-body input,
+.profile .container .card-body input,
+.users-add .container .card-body input,
+.sales-add .container .card-body input,
+.sales-edit .container .card-body input,
+.users-edit .container .card-body input,
+.cats-edit .container .card-body input {
+  margin-bottom: 20px;
+}
+.categories .container .card-2 ,
+.products-manage .container .card-2,
+.sales-manage .container .card-2,
+.profile .container .card-2 {
+  width: 100%;
+}
+.categories .container .card-2 .actions,
+.products-manage .container .card-2 .actions,
+.products-add .container .card-2 .actions,
+.sales-manage .container .card-2 .actions,
+.users-manage .container .card-2 .actions,
+.users-manage .container .card-2 .status {
+  text-align: center;
+}
+/******************** Sales - Users - Sales-Daily - Sales_Monthly - User_Add ********************/
+.sales-manage .container .card-2,
+.users-manage .container .card-2,
+.sales-monthly .container .card-2,
+.sales-daily .container .card-2,
+.users-add .container .card-2,
+.sales-add .container .card-2,
+.sales-edit .container .card-2,
+.users-edit .container .card-2,
+.cats-edit .container .card-2 {
+  width: 100%;
+}
+.sales-manage .container .card-2 .card-header,
+.users-manage .container .card-2 .card-header {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #6c757d;
+  justify-content: space-between;
+}
+.sales-manage .container .card-header .icon-side,
+.users-manage .container .card-header .icon-side,
+.sales-monthly .container .card-header .icon-side,
+.sales-daily .container .card-header .icon-side,
+.users-add .container .card-header .icon-side,
+.sales-add .container .card-header .icon-side,
+.sales-edit .container .card-header .icon-side,
+.users-edit .container .card-header .icon-side,
+.cats-edit .container .card-header .icon-side {
+  display: flex;
+  align-items: center;
+}
+.sales-manage .container .card-header .icon,
+.users-manage .container .card-header .icon,
+.sales-monthly .container .card-header .icon,
+.sales-daily .container .card-header .icon,
+.users-add .container .card-header .icon,
+.sales-add .container .card-header .icon,
+.sales-edit .container .card-header .icon,
+.users-edit .container .card-header .icon,
+.cats-edit .container .card-header .icon {
+  font-size: 25px;
+  padding-bottom: 5px;
+}
+
+/* ******************************** */
+
+.authentication {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #212529;
+  height: 100vh;
+  background: url(https://c4.wallpaperflare.com/wallpaper/636/636/890/line-strip-grey-background-wallpaper-preview.jpg);
+  background-size: cover;
+}
+
+.authentication .container {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 550px;
+  margin: auto;
+  background-color: #fff;
+  padding-bottom: 30px;
+  border-radius: 50px;
+}
+
+.form-box-register{
+    position: relative;
+    width: 400px;
+    height: 580px;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.form-box-login{
+  position: relative;
+  width: 400px;
+  height: 480px;
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.5);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.form-value h2{
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+}
+.inputbox{
+    position: relative;
+    margin: 30px 0;
+    width: 310px;
+    border-bottom: 2px solid #fff;
+}
+.inputbox label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 1em;
+    pointer-events: none;
+    transition: .5s;
+}
+input:focus ~ label,
+input:valid ~ label{
+top: -5px;
+}
+.inputbox input {
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    padding:0 35px 0 5px;
+    color: #fff;
+}
+.inputbox .icon{
+    position: absolute;
+    right: 8px;
+    color: #fff;
+    font-size: 1.2em;
+    top: 20px;
+}
+.form-value button {
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+}
+.form-value button:hover {
+  background-color: #fff;
+  color: #212529;
+}
+.form-value .submit {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.register{
+    font-size: .9em;
+    color: #fff;
+    text-align: center;
+    margin: 25px 0 10px;
+}
+.register p span{
+    text-decoration: none;
+    color: #a2a1a1;
+    font-weight: 600;
+    display: block;
+    cursor: pointer;
+}
+.register p span:hover{
+    text-decoration: underline;
+}

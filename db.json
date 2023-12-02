@@ -1,0 +1,127 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin",
+      "email": "Admin@gmail.com",
+      "role": "admin",
+      "password": "1234"
+    },
+    {
+      "id": 2,
+      "name": "Special",
+      "email": "special@gmail.com",
+      "role": "special",
+      "password": "4321"
+    },
+    {
+      "id": 3,
+      "name": "User-1",
+      "email": "user-1@gmail.com",
+      "role": "user",
+      "password": "user1"
+    },
+    {
+      "id": 4,
+      "name": "User-2",
+      "email": "user-2@gmail.com",
+      "role": "user",
+      "password": "user2"
+    },
+    {
+      "id": 5,
+      "name": "User-3",
+      "email": "user-3@gmail.com",
+      "role": "user",
+      "password": "user3"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Product 1",
+      "price": 99,
+      "category": {
+        "id": 1,
+        "name": "Cars"
+      },
+      "createdAt": "2023-11-26T20:47:12.893Z"
+    },
+    {
+      "id": 2,
+      "name": "Product 2",
+      "price": 99,
+      "category": {
+        "id": 2,
+        "name": "Food"
+      },
+      "createdAt": "2023-11-26T20:47:12.893Z"
+    },
+    {
+      "id": 3,
+      "name": "Product 3",
+      "price": 99,
+      "category": {
+        "id": 3,
+        "name": "Sports"
+      },
+      "createdAt": "2023-11-26T20:47:12.893Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Cars"
+    },
+    {
+      "id": 2,
+      "name": "Food"
+    },
+    {
+      "id": 3,
+      "name": "Sports"
+    }
+  ],
+  "sales": [
+    {
+      "id": 1,
+      "quantity": 3,
+      "totalPrice": "100",
+      "productName": "Product 1",
+      "productPrice": 70,
+      "createdAt": "2023-11-27"
+    },
+    {
+      "id": 2,
+      "quantity": "5",
+      "totalPrice": "450",
+      "productName": "Product 2",
+      "productPrice": 140,
+      "createdAt": "2023-11-28"
+    },
+    {
+      "id": "3",
+      "quantity": "5",
+      "totalPrice": "400",
+      "productName": "Aroura",
+      "productPrice": "100",
+      "createdAt": "2023-11-28"
+    },
+    {
+      "id": 4,
+      "quantity": "4",
+      "totalPrice": "200",
+      "productName": "Monest",
+      "productPrice": "30",
+      "createdAt": "2023-11-28"
+    },
+    {
+      "id": 5,
+      "quantity": "2",
+      "totalPrice": "13",
+      "productName": "abobakr",
+      "productPrice": "12",
+      "createdAt": "2023-11-29"
+    }
+  ]
+}
